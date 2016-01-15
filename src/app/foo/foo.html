@@ -1,0 +1,18 @@
+<div>
+  <span x-large>Bla Bla</span>
+  <input type="text" [(ngModel)]="todos.current" autofocus>
+  <button (click)="handleAdd()">Add</button>
+  <!--
+    Rather than wiring up two-way data-binding ourselves
+    we can use Angular's [(ngModel)] syntax
+    <input type="text" [(ngModel)]="title.value">
+  -->
+
+  <pre>this.title = {{ todos.current }}</pre>
+  <ul>
+    <li *ngFor="#todo of todos.list | async">{{todo.name}}</li>
+  </ul>
+
+</div>
+
+<!--[value]="todos.current" (input)="todos.current = $event.target.value" -->
