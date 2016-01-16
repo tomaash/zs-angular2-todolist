@@ -4,6 +4,8 @@ import {Http, Headers} from 'angular2/http';
 import {TodosService} from '../../providers/todos-service';
 import {Observable} from 'rxjs/Observable';
 
+import {Timer} from '../timer/timer';
+
 @Component({
   // The selector is what angular internally uses
   // for `document.querySelectorAll(selector)` in our index.html
@@ -16,7 +18,8 @@ import {Observable} from 'rxjs/Observable';
   // We need to tell Angular's compiler which directives are in our template.
   // Doing so will allow Angular to attach our behavior to an element
   directives: [
-    ...FORM_DIRECTIVES
+    ...FORM_DIRECTIVES,
+    Timer
   ],
   // We need to tell Angular's compiler which custom pipes are in our template.
   pipes: [ ],
