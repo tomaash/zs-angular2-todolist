@@ -6,8 +6,8 @@ import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
 import {RouterActive} from './directives/router-active';
-import {Home} from './home/home';
-import {Foo} from './foo/foo';
+import {Home} from './components/home/home';
+import {Todos} from './components/todos/todos';
 
 
 /*
@@ -37,7 +37,7 @@ import {Foo} from './foo/foo';
   template: `
     <header>
       <nav>
-        <h1>Hello {{ name }}</h1>
+        <h1>{{ name }}</h1>
         <ul>
           <li router-active="active">
             <a [routerLink]=" ['Index'] ">Index</a>
@@ -46,7 +46,7 @@ import {Foo} from './foo/foo';
             <a [routerLink]=" ['Home'] ">Home</a>
           </li>
           <li router-active="active">
-            <a [routerLink]=" ['Foo'] ">Foo</a>
+            <a [routerLink]=" ['Todos'] ">Todos</a>
           </li>
         </ul>
       </nav>
@@ -55,21 +55,16 @@ import {Foo} from './foo/foo';
     <main>
       <router-outlet></router-outlet>
     </main>
-
-    <footer>
-      WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
-    </footer>
   `
 })
 @RouteConfig([
   { path: '/', component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
-  { path: '/foo', component: Foo, name: 'Foo' },
+  { path: '/todos', component: Todos, name: 'Todos' },
   { path: '/**', redirectTo: ['Index'] }
 ])
 export class App {
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
+  name = 'Angular2 Todo Example';
   constructor() {
 
   }

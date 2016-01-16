@@ -1,0 +1,9 @@
+<div>
+  <input type="text" [(ngModel)]="todosService.current" autofocus>
+  <button (click)="todosService.addTodo()">Add</button>
+
+  <ul>
+    <li *ngFor="#todo of todosService.list | async">{{todo.name}}</li>
+  </ul>
+
+</div>
