@@ -3,12 +3,10 @@ import {TimerService} from '../../providers/timer-service';
 
 @Component({
   selector: 'timer',
-  providers: [
-    TimerService
-  ],
   pipes: [ ],
   template: require('./timer.html')
 })
+
 export class Timer {
   // TypeScript public modifiers
   constructor(public timerService: TimerService) {

@@ -4,7 +4,7 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
-
+import {TimerService} from './providers/timer-service';
 import {RouterActive} from './directives/router-active';
 import {Home} from './components/home/home';
 import {Todos} from './components/todos/todos';
@@ -16,7 +16,7 @@ import {Todos} from './components/todos/todos';
  */
 @Component({
   selector: 'app',
-  providers: [ ...FORM_PROVIDERS ],
+  providers: [ ...FORM_PROVIDERS, TimerService ],
   directives: [ ...ROUTER_DIRECTIVES, RouterActive ],
   pipes: [],
   styles: [`
@@ -65,7 +65,7 @@ import {Todos} from './components/todos/todos';
 ])
 export class App {
   name = 'Angular2 Todo Example';
-  constructor() {
+  constructor(timerService: TimerService) {
 
   }
 }
