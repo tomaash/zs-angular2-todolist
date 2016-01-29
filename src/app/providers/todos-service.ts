@@ -15,7 +15,7 @@ export class TodosService {
   reload() {
     this.http.get('https://zs-todo-api.herokuapp.com/todos')
       .subscribe(
-        data => { this.list = data.json() },
+        data => { this.list = data.json(); },
         err => console.log(err)
       );
     }
@@ -27,7 +27,7 @@ export class TodosService {
     var payload = JSON.stringify(nextTodo);
     this.busy = true;
     this.error = false;
-    this.list.unshift(nextTodo)
+    this.list.unshift(nextTodo);
     this.http.post('https://zs-todo-api.herokuapp.com/todos',
       payload,
       {headers}
@@ -41,7 +41,7 @@ export class TodosService {
           this.error = true;
           this.busy = false;
           this.list.shift();
-          console.log(err)
+          console.log(err);
         }
       );
   }
