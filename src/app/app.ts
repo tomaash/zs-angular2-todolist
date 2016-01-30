@@ -8,6 +8,7 @@ import {TimerService} from './providers/timer-service';
 import {RouterActive} from './directives/router-active';
 import {Home} from './components/home/home';
 import {Todos} from './components/todos/todos';
+import {Settings} from './components/settings/settings'
 
 
 /*
@@ -48,6 +49,9 @@ import {Todos} from './components/todos/todos';
           <li router-active="active">
             <a [routerLink]=" ['Todos'] ">Todos</a>
           </li>
+          <li router-active="active">
+            <a [routerLink]=" ['Settings'] ">Settings</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -61,6 +65,7 @@ import {Todos} from './components/todos/todos';
   { path: '/', component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
   { path: '/todos', component: Todos, name: 'Todos' },
+  { path: '/settings', component: Settings, name: 'Settings' },
   { path: '/**', redirectTo: ['Index'] }
 ])
 export class App {
