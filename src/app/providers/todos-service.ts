@@ -13,10 +13,18 @@ export class TodosService {
   }
 
   reload() {
+    this.busy = true;
     this.http.get('https://zs-todo-api.herokuapp.com/todos')
       .subscribe(
-        data => { this.list = data.json(); },
-        err => console.log(err)
+        data => {
+          this.list = data.json();
+          this.busy = false;
+        },
+        err => {
+          this.error = true;
+          this.busy = false;
+          console.log(err);
+        }
       );
     }
 
