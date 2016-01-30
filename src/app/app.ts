@@ -8,7 +8,7 @@ import {TimerService} from './providers/timer-service';
 import {RouterActive} from './directives/router-active';
 import {Home} from './components/home/home';
 import {Todos} from './components/todos/todos';
-import {Settings} from './components/settings/settings'
+import {Settings} from './components/settings/settings';
 
 
 /*

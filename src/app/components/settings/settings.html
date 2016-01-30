@@ -3,10 +3,8 @@
         <p *ngIf="settingsService.busy"> Working ... </p>
         <p *ngIf="settingsService.error"> Network error! </p>
     </div>
-    <input type="text" [(ngModel)]="settingsService.current" autofocus>
-    <button (click)="settingsService.save()">Add</button>
-    <ul>
-        <li *ngFor="#setting of settingsService.settings">{{setting.name}}</li>
-    </ul>
+    <div>Email:</div>
+    <input type="text" [(ngModel)]="settingsService.emailInput" autofocus>
+    <div><button (click)="settingsService.save()">Save settings</button></div>
 
 </div>

@@ -6,14 +6,24 @@ import {Injectable} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
+var mockSettings = {email : 'default@default.com'};
+
 @Injectable()
 export class SettingsService {
-    settings: Array<Object>;
-    current = '';
+    settings: {
+        email: string;
+    };
+    emailInput = '';
     busy: Boolean = false;
     error: Boolean = false;
     constructor(private http: Http) {
-        this.reload();
+        this.mockReload();
+       // this.reload();
+    }
+
+    mockReload() {
+        this.settings = mockSettings;
+        this.emailInput = this.settings.email;
     }
 
     reload() {
@@ -33,6 +43,7 @@ export class SettingsService {
     }
 
     save() {
+        this.settings.email = this.emailInput;
         /*var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         var nextTodo = {name: this.current};
