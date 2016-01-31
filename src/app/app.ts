@@ -2,12 +2,17 @@
  * Angular 2 decorators and services
  */
 import {Component} from 'angular2/core';
-import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteConfig,
+        Router,
+        ROUTER_DIRECTIVES, OnActivate, ComponentInstruction } from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 import {TimerService} from './providers/timer-service';
 import {RouterActive} from './directives/router-active';
 import {Home} from './components/home/home';
 import {Todos} from './components/todos/todos';
+import {Login} from './components/login/login';
+
+import {AuthService} from './providers/auth-service';
 
 
 /*
@@ -16,7 +21,7 @@ import {Todos} from './components/todos/todos';
  */
 @Component({
   selector: 'app',
-  providers: [ ...FORM_PROVIDERS, TimerService ],
+  providers: [ ...FORM_PROVIDERS, TimerService, AuthService ],
   directives: [ ...ROUTER_DIRECTIVES, RouterActive ],
   pipes: [],
   styles: [`
@@ -48,6 +53,13 @@ import {Todos} from './components/todos/todos';
           <li router-active="active">
             <a [routerLink]=" ['Todos'] ">Todos</a>
           </li>
+          <li *ngIf="!isLogged" router-active="active">
+            <a [routerLink]=" ['Login'] ">Login</a>
+          </li>
+          <li *ngIf="isLogged" >
+            <a (click)="logout()">Logout</a>
+          </li>
+
         </ul>
       </nav>
     </header>
@@ -61,12 +73,32 @@ import {Todos} from './components/todos/todos';
   { path: '/', component: Home, name: 'Index' },
   { path: '/home', component: Home, name: 'Home' },
   { path: '/todos', component: Todos, name: 'Todos' },
+  { path: '/login', component: Login, name: 'Login' },
   { path: '/**', redirectTo: ['Index'] }
 ])
-export class App {
+export class App implements OnActivate {
   name = 'Angular2 Todo Example';
-  constructor(timerService: TimerService) {
+    _authService: AuthService;
+  isLogged: boolean;
+  logout: Function;
 
+  constructor(timerService: TimerService, authService: AuthService) {
+    this._authService = authService;
+
+
+    this._authService.isLogged$.subscribe(isLogged => {
+      console.log(isLogged );
+      this.isLogged = isLogged;
+    });
+  }
+
+  logout() {
+      this._authService.logOut();
+  }
+
+  routerOnActivate(next: ComponentInstruction, prev: ComponentInstruction) {
+    let log = `Finished navigating from "${prev ? prev.urlPath : 'null'}" to "${next.urlPath}"`;
+    console.log(log);
   }
 }
 

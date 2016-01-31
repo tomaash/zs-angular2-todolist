@@ -12,7 +12,7 @@ import {XLarge} from '../../directives/x-large';
   selector: 'home',  // <home></home>
   // We need to tell Angular's Dependency Injection which providers are in our app.
   providers: [
-    Title
+      Title
   ],
   // We need to tell Angular's compiler which directives are in our template.
   // Doing so will allow Angular to attach our behavior to an element
@@ -29,8 +29,8 @@ import {XLarge} from '../../directives/x-large';
 })
 export class Home {
   // TypeScript public modifiers
-  constructor(public title: Title, public http: Http) {
 
+  constructor(public title: Title, public http: Http) {
   }
 
   ngOnInit() {
