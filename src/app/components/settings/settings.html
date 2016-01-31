@@ -3,8 +3,22 @@
         <p *ngIf="settingsService.busy"> Working ... </p>
         <p *ngIf="settingsService.error"> Network error! </p>
     </div>
-    <div>Email:</div>
-    <input type="text" [(ngModel)]="settingsService.emailInput" autofocus>
-    <div><button (click)="settingsService.save()">Save settings</button></div>
 
+    <form>
+        <div class="top-spacer">Username:</div>
+        <input type="text" [(ngModel)]="settingsService.username" disabled>
+
+        <div class="top-spacer">Full Name:</div>
+        <input type="text" [(ngModel)]="settingsService.fullName" autofocus>
+
+        <div class="top-spacer">Email:</div>
+        <input type="text" [(ngModel)]="settingsService.email" >
+
+        <select class="top-spacer" [(ngModel)]="settingsService.country">
+            <option *ngFor="#country of settingsService.countrySelect" [value]="country[1]">{{country[0]}}</option>
+        </select>
+
+
+        <div class="top-spacer"><button (click)="settingsService.save()">Save settings</button></div>
+    </form>
 </div>

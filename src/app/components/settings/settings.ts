@@ -15,6 +15,7 @@ import {FORM_DIRECTIVES} from 'angular2/common';
         ...FORM_DIRECTIVES,
     ],
     pipes: [ ],
+    styles: [ require('./settings.css') ],
     template: require('./settings.html')
 })
 
