@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 import {Http} from 'angular2/http';
 
 import {Title} from '../../providers/title-service';
@@ -16,6 +16,7 @@ import {Router} from 'angular2/router';
     providers: [
         Title
     ],
+    viewProviders: [FormBuilder],
     // We need to tell Angular's compiler which directives are in our template.
     // Doing so will allow Angular to attach our behavior to an element
     directives: [
@@ -32,9 +33,23 @@ export class Login {
     // TypeScript public modifiers
     private _authService: AuthService;
 
+    userForm: ControlGroup;
+    username: Control;
+    password: Control;
+
+
     constructor(public title: Title, public http: Http,
-                private authService: AuthService, private router: Router) {
+                private authService: AuthService, private router: Router, private _formBuilder: FormBuilder) {
         this._authService = authService;
+
+        this.username = _formBuilder.control('', Validators.required);
+        this.password = _formBuilder.control('', Validators.required);
+
+        this.userForm = _formBuilder.group({
+            username: this.username,
+            password: this.password
+        });
+
     }
 
 
@@ -42,14 +57,8 @@ export class Login {
         console.log('Hello Login component');
     }
 
-    login(event, username, password) {
-        // This will be called when the user clicks on the Login button
-        event.preventDefault();
-
-        if (username !== '' && password !== '') {
-            this._authService.logIn();
-            this.router.navigate(['Home']);
-        }
-
+    login() {
+        this._authService.logIn();
+        this.router.navigate(['Home']);
     }
 }
