@@ -3,7 +3,7 @@ import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'a
 import {Http} from 'angular2/http';
 
 import {Title} from '../../providers/title-service';
-import {AuthService} from '../../providers/auth-service';
+import {AuthService} from '../../providers/auth/auth-service';
 
 import {Router} from 'angular2/router';
 
@@ -30,16 +30,16 @@ import {Router} from 'angular2/router';
     template: require('./login.html')
 })
 export class Login {
-    // TypeScript public modifiers
-    private _authService: AuthService;
-
     userForm: ControlGroup;
     username: Control;
     password: Control;
+    private _authService: AuthService;
 
-
-    constructor(public title: Title, public http: Http,
-                private authService: AuthService, private router: Router, private _formBuilder: FormBuilder) {
+    constructor(public title: Title,
+                public http: Http,
+                private authService: AuthService,
+                private router: Router,
+                private _formBuilder: FormBuilder) {
         this._authService = authService;
 
         this.username = _formBuilder.control('', Validators.required);

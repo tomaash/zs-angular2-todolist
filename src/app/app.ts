@@ -2,9 +2,7 @@
  * Angular 2 decorators and services
  */
 import {Component} from 'angular2/core';
-import {RouteConfig,
-        Router,
-        ROUTER_DIRECTIVES, OnActivate, ComponentInstruction } from 'angular2/router';
+import {RouteConfig, Router, ROUTER_DIRECTIVES } from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 import {TimerService} from './providers/timer-service';
 import {RouterActive} from './directives/router-active';
@@ -12,7 +10,7 @@ import {Home} from './components/home/home';
 import {Todos} from './components/todos/todos';
 import {Login} from './components/login/login';
 
-import {AuthService} from './providers/auth-service';
+import {AuthService} from './providers/auth/auth-service';
 
 
 /*
@@ -20,11 +18,11 @@ import {AuthService} from './providers/auth-service';
  * Top Level Component
  */
 @Component({
-  selector: 'app',
-  providers: [ ...FORM_PROVIDERS, TimerService, AuthService ],
-  directives: [ ...ROUTER_DIRECTIVES, RouterActive ],
-  pipes: [],
-  styles: [`
+    selector: 'app',
+    providers: [...FORM_PROVIDERS, TimerService, AuthService],
+    directives: [...ROUTER_DIRECTIVES, RouterActive],
+    pipes: [],
+    styles: [`
     nav ul {
       display: inline;
       list-style-type: none;
@@ -39,7 +37,7 @@ import {AuthService} from './providers/auth-service';
       background-color: lightgray;
     }
   `],
-  template: `
+    template: `
     <header>
       <nav>
         <h1>{{ name }}</h1>
@@ -70,36 +68,31 @@ import {AuthService} from './providers/auth-service';
   `
 })
 @RouteConfig([
-  { path: '/', component: Home, name: 'Index' },
-  { path: '/home', component: Home, name: 'Home' },
-  { path: '/todos', component: Todos, name: 'Todos' },
-  { path: '/login', component: Login, name: 'Login' },
-  { path: '/**', redirectTo: ['Index'] }
+    {path: '/', component: Home, name: 'Index'},
+    {path: '/home', component: Home, name: 'Home'},
+    {path: '/todos', component: Todos, name: 'Todos'},
+    {path: '/login', component: Login, name: 'Login'},
+    {path: '/**', redirectTo: ['Index']}
 ])
-export class App implements OnActivate {
-  name = 'Angular2 Todo Example';
+export class App {
+    name = 'Angular2 Todo Example';
     _authService: AuthService;
-  isLogged: boolean;
-  logout: Function;
+    isLogged: boolean;
+    logout: Function;
 
-  constructor(timerService: TimerService, authService: AuthService) {
-    this._authService = authService;
+    constructor(timerService: TimerService, authService: AuthService) {
+        this._authService = authService;
 
 
-    this._authService.isLogged$.subscribe(isLogged => {
-      console.log(isLogged );
-      this.isLogged = isLogged;
-    });
-  }
+        this._authService.isLogged$.subscribe(isLogged => {
+            console.log(isLogged);
+            this.isLogged = isLogged;
+        });
+    }
 
-  logout() {
-      this._authService.logOut();
-  }
-
-  routerOnActivate(next: ComponentInstruction, prev: ComponentInstruction) {
-    let log = `Finished navigating from "${prev ? prev.urlPath : 'null'}" to "${next.urlPath}"`;
-    console.log(log);
-  }
+    logout() {
+        this._authService.logOut();
+    }
 }
 
 /*

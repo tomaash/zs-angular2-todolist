@@ -4,6 +4,10 @@ import {Http} from 'angular2/http';
 
 import {Title} from '../../providers/title-service';
 import {XLarge} from '../../directives/x-large';
+import {CanActivate} from 'angular2/router';
+
+import {AuthService} from '../../providers/auth/auth-service';
+
 
 @Component({
   // The selector is what angular internally uses
@@ -27,6 +31,7 @@ import {XLarge} from '../../directives/x-large';
   // Every Angular template is first compiled by the browser before Angular runs it's compiler
   template: require('./home.html')
 })
+@CanActivate(AuthService.isLoggedWithRedirection)
 export class Home {
   // TypeScript public modifiers
 
