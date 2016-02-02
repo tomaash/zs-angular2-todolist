@@ -20,14 +20,14 @@ var mockSettings = {
 @Injectable()
 export class SettingsService {
     settings: any;
-    email = '';
-    username = '';
-    fullName = '';
-    companyName = '';
-    position = '';
-    country = '';
-    aboutMe = '';
-    signature = '';
+    //email = '';
+    //username = '';
+    //fullName = '';
+    //companyName = '';
+    //position = '';
+    //country = '';
+    //aboutMe = '';
+    //signature = '';
     countrySelect = [['Czech Republic','CZ'],['Germany','DE']]
     busy: Boolean = false;
     error: Boolean = false;
@@ -39,25 +39,19 @@ export class SettingsService {
     mockReload() {
         this.settings = mockSettings; //fake load
         //setting values into inputs
-        this.email = this.settings.email;
-        this.username = this.settings.username;
-        this.fullName = this.settings.fullName;
-        this.companyName = this.settings.companyName;
-        this.position = this.settings.position;
-        this.country = this.settings.country;
-        this.aboutMe = this.settings.aboutMe;
-        this.signature = this.settings.signature;
+        //this.email = this.settings.email;
+        //this.username = this.settings.username;
+        //this.fullName = this.settings.fullName;
+        //this.companyName = this.settings.companyName;
+        //this.position = this.settings.position;
+        //this.country = this.settings.country;
+        //this.aboutMe = this.settings.aboutMe;
+        //this.signature = this.settings.signature;
     }
 
 
     save() {
-        this.settings.email = this.email;
-        this.settings.fullName = this.fullName;
-        this.settings.companyName = this.companyName;
-        this.settings.position = this.position;
-        this.settings.country = this.country;
-        this.settings.aboutMe = this.aboutMe;
-        this.settings.signature = this.signature;
+        console.log(this.settings);
 
         /*var headers = new Headers();
          headers.append('Content-Type', 'application/json');

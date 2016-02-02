@@ -3,22 +3,23 @@
         <p *ngIf="settingsService.busy"> Working ... </p>
         <p *ngIf="settingsService.error"> Network error! </p>
     </div>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+    <form (ngSubmit)="settingService.save(settingsForm.value)" #settingsForm="ngForm">
+        <label class="top-spacer">Username:</label>
+        <input type="text" class="form-control" ngControl="username" [(ngModel)]="settingsService.settings.username" disabled>
 
-    <form>
-        <div class="top-spacer">Username:</div>
-        <input type="text" [(ngModel)]="settingsService.username" disabled>
+        <label class="top-spacer">Full Name:</label>
+        <input type="text" class="form-control" ngControl="fullName" [(ngModel)]="settingsService.settings.fullName" autofocus>
 
-        <div class="top-spacer">Full Name:</div>
-        <input type="text" [(ngModel)]="settingsService.fullName" autofocus>
+        <label class="top-spacer">Email:</label>
+        <input type="text" class="form-control" ngControl="email" [(ngModel)]="settingsService.settings.email" >
 
-        <div class="top-spacer">Email:</div>
-        <input type="text" [(ngModel)]="settingsService.email" >
-
-        <select class="top-spacer" [(ngModel)]="settingsService.country">
+      <label class="top-spacer">Country:</label>
+      <select class="form-control" [(ngModel)]="settingsService.settings.country">
             <option *ngFor="#country of settingsService.countrySelect" [value]="country[1]">{{country[0]}}</option>
         </select>
 
-
-        <div class="top-spacer"><button (click)="settingsService.save()">Save settings</button></div>
-    </form>
+        <div class="top-spacer"><button type="submit" class="text-center btn btn-default btn-md">Save settings</button></div>
+    </form></div>
 </div>
